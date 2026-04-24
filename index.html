@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You 🎟️</title>
+<title>For You 💖</title>
 
 <style>
 body {
@@ -10,8 +10,9 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#fff5f7;
-  font-family: 'Georgia', serif;
+  background:#fff0f5;
+  font-family:'Georgia', serif;
+  overflow:hidden;
 }
 
 /* Start Screen */
@@ -22,78 +23,37 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#fff5f7;
-  color:#d46a7e;
+  background:#fff0f5;
+  color:#ff6f91;
   font-size:22px;
   cursor:pointer;
 }
 
-/* Ticket */
-.ticket {
-  width:700px;
-  max-width:90%;
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
-  display:flex;
-  overflow:hidden;
-  border:2px dashed #f3c6cf;
-}
-
-/* Left side */
-.left {
-  flex:2;
-  padding:25px;
-  border-right:2px dashed #f3c6cf;
-}
-
-/* Right stub */
-.right {
-  flex:1;
-  padding:20px;
-  text-align:center;
-  background:#ffe9ee;
-}
-
-/* Titles */
-h1 {
-  margin:0;
-  font-size:28px;
-  color:#d46a7e;
-}
-
-.subtitle {
-  font-size:14px;
-  color:#888;
-  margin-bottom:15px;
-}
-
-/* Details */
-.info {
-  display:flex;
-  justify-content:space-between;
-  margin:15px 0;
-  font-size:14px;
-}
-
-/* Cute icons */
-.emoji {
-  font-size:18px;
-}
-
 /* Message box */
+#box {
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  max-width:500px;
+  width:80%;
+  text-align:center;
+  display:none;
+}
+
+/* Text */
 #text {
-  margin-top:20px;
-  font-size:16px;
+  font-size:17px;
   line-height:1.7;
   white-space:pre-line;
+  color:#444;
 }
 
 /* Cursor */
 .cursor {
   display:inline-block;
   width:8px;
-  background:#d46a7e;
+  background:#ff6f91;
   animation:blink 1s infinite;
 }
 
@@ -104,19 +64,28 @@ h1 {
 /* Button */
 button {
   margin-top:20px;
-  padding:10px 18px;
+  padding:10px 20px;
   border:none;
-  background:#d46a7e;
+  background:#ff6f91;
   color:white;
-  border-radius:20px;
+  border-radius:25px;
   cursor:pointer;
+  font-size:14px;
 }
 
-/* Small floating hearts */
+/* Surprise */
+#surprise {
+  margin-top:20px;
+  font-size:18px;
+  color:#ff4d6d;
+  display:none;
+}
+
+/* Floating hearts */
 .heart {
   position:absolute;
   color:#ff9eb5;
-  font-size:20px;
+  font-size:18px;
   animation:float 5s linear infinite;
 }
 
@@ -129,37 +98,17 @@ button {
 
 <body>
 
-<div id="startScreen" onclick="start()">🎟️ Tap to open your ticket</div>
+<div id="startScreen" onclick="start()">💖 Tap to open</div>
 
-<div class="ticket" id="ticket" style="display:none;">
+<div id="box">
+  <div id="text"></div><span class="cursor"></span>
 
-  <!-- LEFT -->
-  <div class="left">
-    <h1>💖 Movie Date Night</h1>
-    <div class="subtitle">Good movies. Better company.</div>
+  <button onclick="showSurprise()">💌 Open Surprise</button>
 
-    <div class="info">
-      <div>📅 Tonight</div>
-      <div>⏰ 9:30 PM</div>
-    </div>
-
-    <div class="info">
-      <div>💻 Online</div>
-      <div>🍿 Snacks ready</div>
-    </div>
-
-    <div id="text"></div><span class="cursor"></span>
-
-    <button onclick="extra()">💌 Open Surprise</button>
+  <div id="surprise">
+    I love you ❤️  
+    I miss you more than you think 🥺💖
   </div>
-
-  <!-- RIGHT -->
-  <div class="right">
-    <h3>🎟️ Admit One</h3>
-    <p style="margin-top:30px;">Movie Night</p>
-    <p style="font-size:12px;">Let’s make memories ❤️</p>
-  </div>
-
 </div>
 
 <audio id="bgm" loop>
@@ -168,24 +117,29 @@ button {
 
 <script>
 
-const message = `You’re not just someone I love.
+const message = `Hey…
 
-You’re the person I want in
-all the small, simple moments.
+I don’t say this enough.
 
-The random talks.
-The stupid jokes.
+But somewhere between
+all the random conversations
+and small moments…
 
-And honestly?
+you became my favorite person.
 
-I’d still choose you.
-Every single time.`;
+The one I think about
+without even trying.
+
+And honestly…
+
+I just really miss you.`;
+
 
 let i = 0;
 
 function start(){
   document.getElementById("startScreen").style.display="none";
-  document.getElementById("ticket").style.display="flex";
+  document.getElementById("box").style.display="block";
   document.getElementById("bgm").volume = 0.2;
   document.getElementById("bgm").play();
   type();
@@ -200,8 +154,8 @@ function type(){
   }
 }
 
-function extra(){
-  document.getElementById("text").innerHTML += "\n\nStay with me. Always. ❤️";
+function showSurprise(){
+  document.getElementById("surprise").style.display="block";
 }
 
 /* Floating hearts */
@@ -215,7 +169,7 @@ function hearts(){
     document.body.appendChild(h);
 
     setTimeout(()=>{ h.remove(); },5000);
-  },800);
+  },700);
 }
 
 </script>
