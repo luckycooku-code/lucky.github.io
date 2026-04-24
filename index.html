@@ -83,6 +83,12 @@ button {
   font-size:14px;
 }
 
+/* Audio */
+audio {
+  width:100%;
+  margin-top:15px;
+}
+  
 /* Surprise */
 #surprise {
   margin-top:20px;
@@ -111,21 +117,20 @@ button {
 <div id="startScreen" onclick="start()">💌 Tap to open</div>
 
 <div id="box">
-  <div id="title">just something for you</div>
+  <div id="title">just something for you❤️</div>
 
   <div id="text"></div><span class="cursor"></span>
-
+<audio id="bgm" loop>
+  <source src="Bairan - Bairan (320 kbps).mp3" type="audio/mpeg">
+</audio>
+  
   <button onclick="showSurprise()">open surprise 💖</button>
-
+  
   <div id="surprise">
     I love you ❤️  
     I miss you more than you think 🥺
   </div>
 </div>
-
-<audio id="bgm" loop>
-  <source src="Bairan - Bairan (320 kbps).mp3" type="audio/mpeg">
-</audio>
 
 <script>
 
@@ -148,8 +153,10 @@ let i = 0;
 function start(){
   document.getElementById("startScreen").style.display="none";
   document.getElementById("box").style.display="block";
-  document.getElementById("bgm").volume = 0.15;
-  document.getElementById("bgm").play();
+ let music = document.getElementById("bgm");
+  music.volume = 0.15;
+  music.play(); // starts after tap
+
   type();
   hearts();
 }
