@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You</title>
+<style>
+body {
+  background:black;
+  color:#ff4d6d;
+  font-family:monospace;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+}
+#text {
+  width:80%;
+  max-width:600px;
+  font-size:18px;
+  line-height:1.6;
+  white-space:pre-line;
+}
+.cursor {
+  display:inline-block;
+  width:10px;
+  background:#ff4d6d;
+  animation:blink 1s infinite;
+}
+@keyframes blink {
+  50% { background:transparent; }
+}
+</style>
+</head>
+
+<body>
+<div id="text"></div><span class="cursor"></span>
+
+<script>
+const message = `You’re not just someone I love.
+
+You’re the person I want
+in the small, normal moments.
+
+The random talks.
+The stupid jokes.
+The silence that still feels right.
+
+It’s not about big words.
+
+It’s just…
+you,
+and somehow,
+that’s everything.`;
+
+let i = 0;
+function type() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(type, 40);
+  }
+}
+type();
+</script>
+
+</body>
+</html>
