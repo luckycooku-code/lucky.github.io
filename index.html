@@ -10,7 +10,7 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#fff0f5;
+  background:#fff5f7;
   font-family:'Georgia', serif;
   overflow:hidden;
 }
@@ -23,27 +23,37 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#fff0f5;
-  color:#ff6f91;
+  background:#fff5f7;
+  color:#d46a7e;
   font-size:22px;
   cursor:pointer;
+  letter-spacing:1px;
 }
 
-/* Message box */
+/* Box */
 #box {
-  background:white;
+  background:#ffffff;
   padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  max-width:500px;
-  width:80%;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  max-width:480px;
+  width:85%;
   text-align:center;
   display:none;
+  border:1px solid #f3d6db;
+}
+
+/* Small heading */
+#title {
+  font-size:16px;
+  color:#d46a7e;
+  margin-bottom:10px;
+  letter-spacing:1px;
 }
 
 /* Text */
 #text {
-  font-size:17px;
+  font-size:16px;
   line-height:1.7;
   white-space:pre-line;
   color:#444;
@@ -53,7 +63,7 @@ body {
 .cursor {
   display:inline-block;
   width:8px;
-  background:#ff6f91;
+  background:#d46a7e;
   animation:blink 1s infinite;
 }
 
@@ -66,9 +76,9 @@ button {
   margin-top:20px;
   padding:10px 20px;
   border:none;
-  background:#ff6f91;
+  background:#d46a7e;
   color:white;
-  border-radius:25px;
+  border-radius:20px;
   cursor:pointer;
   font-size:14px;
 }
@@ -77,20 +87,20 @@ button {
 #surprise {
   margin-top:20px;
   font-size:18px;
-  color:#ff4d6d;
+  color:#c94f65;
   display:none;
 }
 
-/* Floating hearts */
+/* Tiny floating hearts (subtle) */
 .heart {
   position:absolute;
-  color:#ff9eb5;
-  font-size:18px;
-  animation:float 5s linear infinite;
+  color:#ffc0cb;
+  font-size:14px;
+  animation:float 6s linear infinite;
 }
 
 @keyframes float {
-  from { transform:translateY(0); opacity:1; }
+  from { transform:translateY(0); opacity:0.8; }
   to { transform:translateY(-100vh); opacity:0; }
 }
 </style>
@@ -98,16 +108,18 @@ button {
 
 <body>
 
-<div id="startScreen" onclick="start()">💖 Tap to open</div>
+<div id="startScreen" onclick="start()">💌 Tap to open</div>
 
 <div id="box">
+  <div id="title">just something for you</div>
+
   <div id="text"></div><span class="cursor"></span>
 
-  <button onclick="showSurprise()">💌 Open Surprise</button>
+  <button onclick="showSurprise()">open this 💖</button>
 
   <div id="surprise">
     I love you ❤️  
-    I miss you more than you think 🥺💖
+    I miss you 🥺
   </div>
 </div>
 
@@ -117,22 +129,18 @@ button {
 
 <script>
 
-const message = `Hey…
+/* SIMPLE + CLEAR MESSAGE */
+const message = `Hey gundanna
 
-I don’t say this enough.
+I just wanted to say.
 
-But somewhere between
-all the random conversations
-and small moments…
+You matter to me.
 
-you became my favorite person.
-
-The one I think about
-without even trying.
+A lot more than I usually say.
 
 And honestly…
 
-I just really miss you.`;
+I really miss you.`;
 
 
 let i = 0;
@@ -140,7 +148,7 @@ let i = 0;
 function start(){
   document.getElementById("startScreen").style.display="none";
   document.getElementById("box").style.display="block";
-  document.getElementById("bgm").volume = 0.2;
+  document.getElementById("bgm").volume = 0.15;
   document.getElementById("bgm").play();
   type();
   hearts();
@@ -150,7 +158,7 @@ function type(){
   if(i < message.length){
     document.getElementById("text").innerHTML += message.charAt(i);
     i++;
-    setTimeout(type, 50);
+    setTimeout(type, 55);
   }
 }
 
@@ -158,7 +166,7 @@ function showSurprise(){
   document.getElementById("surprise").style.display="block";
 }
 
-/* Floating hearts */
+/* Subtle hearts */
 function hearts(){
   setInterval(()=>{
     let h = document.createElement("div");
@@ -168,8 +176,8 @@ function hearts(){
     h.style.bottom = "0px";
     document.body.appendChild(h);
 
-    setTimeout(()=>{ h.remove(); },5000);
-  },700);
+    setTimeout(()=>{ h.remove(); },6000);
+  },1200);
 }
 
 </script>
