@@ -130,6 +130,9 @@ audio {
     I love you ❤️  
     I miss you more than you think 🥺
     <button onclick="reply()">did you smile? 😊</button>
+    <p id="replyText" style="display:none; margin-top:10px; color:#d46a7e;">
+  That means everything to me ❤️
+</p>
   </div>
 </div>
 
@@ -190,7 +193,7 @@ function hearts(){
 }
 
 function reply(){
-  document.getElementById("surprise").innerHTML += "\n\nThat means everything to me ❤️";
+  document.getElementById("replyText").style.display = "block";
 }
 </script>
 
