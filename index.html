@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You</title>
+<title>For You 🎟️</title>
 
 <style>
 body {
-  background:black;
-  color:#ff4d6d;
-  font-family:monospace;
+  margin:0;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  margin:0;
-  overflow:hidden;
+  background:#fff5f7;
+  font-family: 'Georgia', serif;
 }
 
 /* Start Screen */
@@ -24,48 +22,148 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  color:#ff4d6d;
-  background:black;
+  background:#fff5f7;
+  color:#d46a7e;
   font-size:22px;
   cursor:pointer;
 }
 
-/* Text */
-#text {
-  width:80%;
-  max-width:600px;
+/* Ticket */
+.ticket {
+  width:700px;
+  max-width:90%;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  display:flex;
+  overflow:hidden;
+  border:2px dashed #f3c6cf;
+}
+
+/* Left side */
+.left {
+  flex:2;
+  padding:25px;
+  border-right:2px dashed #f3c6cf;
+}
+
+/* Right stub */
+.right {
+  flex:1;
+  padding:20px;
+  text-align:center;
+  background:#ffe9ee;
+}
+
+/* Titles */
+h1 {
+  margin:0;
+  font-size:28px;
+  color:#d46a7e;
+}
+
+.subtitle {
+  font-size:14px;
+  color:#888;
+  margin-bottom:15px;
+}
+
+/* Details */
+.info {
+  display:flex;
+  justify-content:space-between;
+  margin:15px 0;
+  font-size:14px;
+}
+
+/* Cute icons */
+.emoji {
   font-size:18px;
-  line-height:1.6;
+}
+
+/* Message box */
+#text {
+  margin-top:20px;
+  font-size:16px;
+  line-height:1.7;
   white-space:pre-line;
 }
 
 /* Cursor */
 .cursor {
   display:inline-block;
-  width:10px;
-  background:#ff4d6d;
+  width:8px;
+  background:#d46a7e;
   animation:blink 1s infinite;
 }
 
 @keyframes blink {
   50% { background:transparent; }
 }
+
+/* Button */
+button {
+  margin-top:20px;
+  padding:10px 18px;
+  border:none;
+  background:#d46a7e;
+  color:white;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* Small floating hearts */
+.heart {
+  position:absolute;
+  color:#ff9eb5;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+
+@keyframes float {
+  from { transform:translateY(0); opacity:1; }
+  to { transform:translateY(-100vh); opacity:0; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- Tap to Start -->
-<div id="startScreen" onclick="start()">
-  Tap to open
+<div id="startScreen" onclick="start()">🎟️ Tap to open your ticket</div>
+
+<div class="ticket" id="ticket" style="display:none;">
+
+  <!-- LEFT -->
+  <div class="left">
+    <h1>💖 Movie Date Night</h1>
+    <div class="subtitle">Good movies. Better company.</div>
+
+    <div class="info">
+      <div>📅 Tonight</div>
+      <div>⏰ 9:30 PM</div>
+    </div>
+
+    <div class="info">
+      <div>💻 Online</div>
+      <div>🍿 Snacks ready</div>
+    </div>
+
+    <div id="text"></div><span class="cursor"></span>
+
+    <button onclick="extra()">💌 Open Surprise</button>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <h3>🎟️ Admit One</h3>
+    <p style="margin-top:30px;">Movie Night</p>
+    <p style="font-size:12px;">Let’s make memories ❤️</p>
+  </div>
+
 </div>
 
-<!-- Message -->
-<div id="text"></div><span class="cursor"></span>
-
-<!-- Music -->
 <audio id="bgm" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
 <script>
@@ -73,11 +171,10 @@ body {
 const message = `You’re not just someone I love.
 
 You’re the person I want in
-all the normal, boring moments.
+all the small, simple moments.
 
 The random talks.
 The stupid jokes.
-The silence that still feels right.
 
 And honestly?
 
@@ -86,30 +183,39 @@ Every single time.`;
 
 let i = 0;
 
-/* Start function */
 function start(){
   document.getElementById("startScreen").style.display="none";
-  document.getElementById("bgm").volume = 0.3;
+  document.getElementById("ticket").style.display="flex";
+  document.getElementById("bgm").volume = 0.2;
   document.getElementById("bgm").play();
   type();
+  hearts();
 }
 
-/* Typing effect */
-function type() {
-  if (i < message.length) {
+function type(){
+  if(i < message.length){
     document.getElementById("text").innerHTML += message.charAt(i);
     i++;
-    setTimeout(type, 55);
-  } else {
-    ending();
+    setTimeout(type, 50);
   }
 }
 
-/* Final impact line */
-function ending(){
-  setTimeout(()=>{
-    document.getElementById("text").innerHTML += "\n\nClose this if you don’t feel the same.";
-  }, 1500);
+function extra(){
+  document.getElementById("text").innerHTML += "\n\nStay with me. Always. ❤️";
+}
+
+/* Floating hearts */
+function hearts(){
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💗";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.bottom = "0px";
+    document.body.appendChild(h);
+
+    setTimeout(()=>{ h.remove(); },5000);
+  },800);
 }
 
 </script>
