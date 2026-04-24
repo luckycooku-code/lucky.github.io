@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>For You</title>
+
 <style>
 body {
   background:black;
@@ -12,7 +13,24 @@ body {
   align-items:center;
   height:100vh;
   margin:0;
+  overflow:hidden;
 }
+
+/* Start Screen */
+#startScreen {
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#ff4d6d;
+  background:black;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* Text */
 #text {
   width:80%;
   max-width:600px;
@@ -20,12 +38,15 @@ body {
   line-height:1.6;
   white-space:pre-line;
 }
+
+/* Cursor */
 .cursor {
   display:inline-block;
   width:10px;
   background:#ff4d6d;
   animation:blink 1s infinite;
 }
+
 @keyframes blink {
   50% { background:transparent; }
 }
@@ -33,34 +54,64 @@ body {
 </head>
 
 <body>
+
+<!-- Tap to Start -->
+<div id="startScreen" onclick="start()">
+  Tap to open
+</div>
+
+<!-- Message -->
 <div id="text"></div><span class="cursor"></span>
 
+<!-- Music -->
+<audio id="bgm" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+
 const message = `You’re not just someone I love.
 
-You’re the person I want
-in the small, normal moments.
+You’re the person I want in
+all the normal, boring moments.
 
 The random talks.
 The stupid jokes.
 The silence that still feels right.
 
-It’s not about big words.
+And honestly?
 
-It’s just…
-you,
-and somehow,
-that’s everything.`;
+I’d still choose you.
+Every single time.`;
 
 let i = 0;
+
+/* Start function */
+function start(){
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("bgm").volume = 0.3;
+  document.getElementById("bgm").play();
+  type();
+}
+
+/* Typing effect */
 function type() {
   if (i < message.length) {
     document.getElementById("text").innerHTML += message.charAt(i);
     i++;
-    setTimeout(type, 40);
+    setTimeout(type, 55);
+  } else {
+    ending();
   }
 }
-type();
+
+/* Final impact line */
+function ending(){
+  setTimeout(()=>{
+    document.getElementById("text").innerHTML += "\n\nClose this if you don’t feel the same.";
+  }, 1500);
+}
+
 </script>
 
 </body>
